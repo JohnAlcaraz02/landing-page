@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const REVIEWS = [
   {
@@ -129,7 +130,7 @@ export default function Home() {
     <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#f9fafb', display: 'flex', flexDirection: 'column' }}>
 
       {/* ── Hero Section ── */}
-      <div style={{ margin: '12px', borderRadius: '16px', overflow: 'hidden', position: 'relative' }}>
+      <div style={{ margin: '26px 30px', borderRadius: '30px', overflow: 'hidden', position: 'relative' }}>
         <div style={{
           position: 'absolute', inset: 0,
           backgroundColor: '#648b5c2e',
@@ -163,25 +164,56 @@ export default function Home() {
             }}>
               Track all your money in one place,<br />effortlessly
             </h1>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
-              <a href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer">
+            <div className="download-buttons" style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
+              <a className="download-btn" href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer">
                 <Image src="/assets/app_store_logo.png" alt="Download on App Store" width={150} height={50} style={{ height: '40px', width: 'auto' }} />
               </a>
-              <a href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer">
+              <a className="download-btn" href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer">
                 <Image src="/assets/android_logo.png" alt="Get it on Google Play" width={150} height={50} style={{ height: '40px', width: 'auto' }} />
               </a>
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '0 16px', marginTop: '-16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', padding: '0 40px', marginTop: '-16px' }}>
             <Image src="/assets/Mockups.png" alt="Tarsi App Mockups" width={1600} height={820} quality={100}
-              style={{ width: '100%', maxWidth: '1500px', height: 'auto', display: 'block' }} priority />
+              style={{ width: '100%', maxWidth: '700px', height: 'auto', display: 'block' }} priority />
           </div>
         </div>
       </div>
 
       {/* ── Feature Section ── */}
       <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .download-buttons {
+          flex-wrap: nowrap !important;
+        }
+
+        .download-btn {
+          transition: transform 200ms ease, filter 200ms ease;
+          display: inline-block;
+        }
+
+        .download-btn:hover {
+          transform: scale(1.05) translateY(-2px);
+          filter: brightness(0.95);
+        }
+        @media (max-width: 480px) {
+          .download-buttons {
+            gap: 8px;
+            flex-wrap: nowrap;
+          }
+          .download-buttons img {
+            height: 32px !important;
+          }
+        }
         .feature-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -394,6 +426,16 @@ export default function Home() {
           height: 44px !important;
           width: auto !important;
           display: block !important;
+        }
+
+        .final-cta-badges a {
+          transition: transform 200ms ease, filter 200ms ease;
+          display: inline-block;
+        }
+
+        .final-cta-badges a:hover {
+          transform: scale(1.05) translateY(-2px);
+          filter: brightness(0.95);
         }
 
         @media (max-width: 520px) {
@@ -632,7 +674,7 @@ export default function Home() {
         }
       `}</style>
 
-      <section style={{ width: '100%', backgroundColor: '#5C8A52', padding: '12px 12px 40px', overflow: 'visible' }}>
+      <section style={{ width: '100%', backgroundColor: '#5C8A52', padding: '60px 12px 40px', overflow: 'visible' }}>
         <div style={{ width: '100%', maxWidth: '1500px', margin: '0 auto', overflow: 'visible', paddingBottom: '20px' }}>
           <div className="feature-grid" style={{ overflow: 'visible' }}>
 
@@ -662,7 +704,7 @@ export default function Home() {
             </div>
 
             {/* Card 3 — Visualize Your Progress */}
-            <div className="feat-card feat-card-3 feature-reveal-card feature-reveal-left">
+            <div className="feat-card feat-card-3 feature-reveal-card feature-reveal-left" style={{ marginTop: '40px' }}>
               <div style={{ position: 'relative', zIndex: 2, maxWidth: '55%' }}>
                 <div className="feat-title">VISUALIZE YOUR PROGRESS</div>
                 <div className="daily-balance-chart" style={{ marginTop: '12px', width: 'clamp(140px, 25vw, 200px)', borderRadius: '14px', backgroundColor: '#ffffff', boxShadow: '0 6px 18px rgba(0,0,0,0.07)', padding: '12px 14px' }}>
@@ -683,13 +725,13 @@ export default function Home() {
             </div>
 
             {/* Card 4 — Jumpstart Your Journey */}
-            <div className="feat-card feat-card-4 feature-reveal-card feature-reveal-right">
+            <div className="feat-card feat-card-4 feature-reveal-card feature-reveal-right"  style={{ marginTop: '40px' }}>
               <div className="feat-card-4-content">
                 <div className="feat-title-mixed">Jumpstart Your Journey</div>
                 <div className="feat-subtitle">Take the first leap to <br />financial freedom</div>
               </div>
               <div className="char-img-br-jump">
-                <Image src="/assets/Happy_jump 2.png" alt="Happy jumping Tarsi" width={340} height={360} quality={100} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                <Image src="/assets/Happy_jump 2.png" alt="Happy jumping Tarsi" width={340} height={360} quality={100} style={{ width: '100%', height: 'auto', display: 'block', animation: 'float 3s ease-in-out infinite' }} />
               </div>
             </div>
 
@@ -767,10 +809,10 @@ export default function Home() {
             <p className="final-cta-eyebrow">FINAL CALL-TO-ACTION</p>
             <h2 className="final-cta-title">TAKE CONTROL OF YOUR FINANCES TODAY</h2>
             <div className="final-cta-badges">
-              <a href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer">
+              <a className="download-btn" href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer">
                 <Image src="/assets/app_store_logo.png" alt="Download on App Store" width={160} height={50} />
               </a>
-              <a href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer">
+              <a className="download-btn" href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer">
                 <Image src="/assets/android_logo.png" alt="Get it on Google Play" width={160} height={50} />
               </a>
             </div>
@@ -778,6 +820,19 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* ── Footer ── */}
+      <footer style={{ width: '100%', backgroundColor: '#ffffff', padding: '32px 12px', borderTop: '1px solid #e5e5e5' }}>
+        <div style={{ maxWidth: '1500px', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '60px' }}>
+          <div style={{ fontSize: '14px', color: '#888888', fontWeight: '500' }}>
+            Copyright 2026 Tarsi. All rights reserved.
+          </div>
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+            <Link href="/privacy" style={{ fontSize: '14px', color: '#888888', textDecoration: 'none', fontWeight: '500', transition: 'color 200ms ease' }} onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#5C8A52'} onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#888888'}>Privacy Policy</Link>
+            <Link href="/terms" style={{ fontSize: '14px', color: '#888888', textDecoration: 'none', fontWeight: '500', transition: 'color 200ms ease' }} onMouseEnter={(e) => (e.currentTarget as HTMLElement).style.color = '#5C8A52'} onMouseLeave={(e) => (e.currentTarget as HTMLElement).style.color = '#888888'}>Terms</Link>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );
