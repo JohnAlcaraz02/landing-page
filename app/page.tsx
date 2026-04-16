@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,6 +33,7 @@ const REVIEWS = [
 ];
 
 export default function Home() {
+  const [selectedMockup, setSelectedMockup] = useState<string | null>(null);
   const marqueeViewportRef = useRef<HTMLDivElement | null>(null);
   const marqueeDragRef = useRef({ isDragging: false, startX: 0, startScrollLeft: 0 });
 
@@ -130,56 +131,484 @@ export default function Home() {
     <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#f9fafb', display: 'flex', flexDirection: 'column' }}>
 
       {/* ── Hero Section ── */}
-      <div style={{ margin: '26px 30px', borderRadius: '30px', overflow: 'hidden', position: 'relative' }}>
+      <div style={{ margin: '26px 30px', borderRadius: '30px', overflow: 'hidden', position: 'relative', minHeight: '600px' }}>
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundColor: '#648b5c2e',
+          backgroundColor: '#f0f4ee',
           backgroundImage: `
-            radial-gradient(ellipse 100% 75% at 50% 0%, #9EB29A 70%, transparent 100%),
-            radial-gradient(ellipse 100% 50% at 50% 100%, #9EB29A 30%, transparent 70%)
+            radial-gradient(ellipse 120% 80% at 50% 10%, rgba(100, 139, 92, 0.3) 0%, transparent 50%),
+            radial-gradient(ellipse 100% 100% at 50% 90%, rgba(92, 138, 82, 0.2) 0%, transparent 60%)
           `,
           zIndex: 0,
         }} />
         <div style={{
           position: 'absolute', inset: 0,
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat', backgroundSize: '128px 128px', opacity: 0.08, zIndex: 1,
+          backgroundRepeat: 'repeat', backgroundSize: '128px 128px', opacity: 0.05, zIndex: 1,
         }} />
 
-        <div style={{ position: 'relative', zIndex: 2 }}>
-          <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 20px' }}>
-            <Image src="/assets/Logo.png" alt="Tarsi Logo" width={120} height={40} quality={100} style={{ height: '32px', width: 'auto' }} />
+        <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '600px', padding: '40px 20px', textAlign: 'center' }}>
+          <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 20px', width: '100%', marginBottom: '20px' }}>
+            <Image src="/assets/tarsi_logo.png" alt="Tarsi Logo" width={120} height={40} quality={100} style={{ height: '70px', width: 'auto' }} />
             <a href="https://www.facebook.com/groups/1243677331220736/" target="_blank" rel="noreferrer" style={{
-              backgroundColor: 'white', color: '#648B5C', padding: '8px 16px', borderRadius: '9999px',
+              backgroundColor: '#648B5C', color: '#ffffff', padding: '15px 20px', borderRadius: '9999px',
               fontWeight: '800', fontSize: '12px', border: 'none', cursor: 'pointer', textDecoration: 'none', display: 'inline-block', whiteSpace: 'nowrap',
             }}>
               JOIN COMMUNITY
             </a>
           </nav>
 
-          <div style={{ textAlign: 'center', padding: '8px 20px 0px' }}>
-            <h1 style={{
-              fontSize: 'clamp(1.6rem, 5vw, 3.75rem)', fontWeight: '800', color: 'white',
-              lineHeight: '1.2', fontStyle: 'italic', marginBottom: '20px', textShadow: '0 2px 12px rgba(0,0,0,0.15)',
+          <p style={{
+            fontSize: '14px', fontWeight: '600', color: '#648B5C', marginBottom: '12px', letterSpacing: '0.5px',
+            textTransform: 'uppercase'
+          }}>
+            AI in Your Pocket
+          </p>
+          
+          <h1 style={{
+            fontSize: 'clamp(2rem, 6vw, 3.5rem)', fontWeight: '800', color: '#111111',
+            lineHeight: '1.15', marginBottom: '20px', maxWidth: '900px'
+          }}>
+            Revolutionize Your Day<br />with the Power of AI
+          </h1>
+          
+          <p style={{
+            fontSize: '16px', color: '#6b7280', lineHeight: '1.6', marginBottom: '32px',
+            maxWidth: '600px', fontWeight: '500'
+          }}>
+            Experience the power of artificial intelligence to simplify tasks, boost productivity, and enhance your daily life.
+          </p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', justifyContent: 'center', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
+            <a href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer" style={{
+              backgroundColor: 'white', color: '#648B5C', padding: '12px 28px', borderRadius: '9999px',
+              fontWeight: '800', fontSize: '13px', border: '2px solid #648B5C', cursor: 'pointer', textDecoration: 'none', 
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', whiteSpace: 'nowrap',
+              transition: 'all 200ms ease', width: '100%',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = '#648B5C';
+              (e.currentTarget as HTMLElement).style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = 'white';
+              (e.currentTarget as HTMLElement).style.color = '#648B5C';
             }}>
-              Track all your money in one place,<br />effortlessly
-            </h1>
-            <div className="download-buttons" style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '8px', flexWrap: 'wrap' }}>
-              <a className="download-btn" href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer">
-                <Image src="/assets/app_store_logo.png" alt="Download on App Store" width={150} height={50} style={{ height: '40px', width: 'auto' }} />
-              </a>
-              <a className="download-btn" href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer">
-                <Image src="/assets/android_logo.png" alt="Get it on Google Play" width={150} height={50} style={{ height: '40px', width: 'auto' }} />
-              </a>
-            </div>
+              <Image src="/assets/app_store1.png" alt="App Store" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
+              DOWNLOAD FOR iOS
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer" style={{
+              backgroundColor: 'white', color: '#648B5C', padding: '12px 28px', borderRadius: '9999px',
+              fontWeight: '800', fontSize: '13px', border: '2px solid #648B5C', cursor: 'pointer', textDecoration: 'none', 
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', whiteSpace: 'nowrap',
+              transition: 'all 200ms ease', width: '100%',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = '#648B5C';
+              (e.currentTarget as HTMLElement).style.color = 'white';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.backgroundColor = 'white';
+              (e.currentTarget as HTMLElement).style.color = '#648B5C';
+            }}>
+              <Image src="/assets/play_store.png" alt="Google Play" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
+              DOWNLOAD FOR ANDROID
+            </a>
           </div>
-
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '0 40px', marginTop: '-16px' }}>
-            <Image src="/assets/Mockups.png" alt="Tarsi App Mockups" width={1600} height={820} quality={100}
-              style={{ width: '100%', maxWidth: '700px', height: 'auto', display: 'block' }} priority />
+          
+          <div style={{ marginTop: '48px', display: 'flex', justifyContent: 'center' }}>
+            <Image src="/assets/mockup1.png" alt="Tarsi App Mockups" width={1600} height={820} quality={100}
+              style={{ width: '100%', maxWidth: '300px', height: 'auto', display: 'block' }} priority />
           </div>
         </div>
       </div>
+
+      {/* ── App Screens Marquee Section ── */}
+      <section style={{ width: '100%', backgroundColor: '#f9f8f6', padding: '80px 20px', overflow: 'hidden', minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+        <style>{`
+          @keyframes marquee-vertical {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+          }
+          @keyframes marquee-vertical-reverse {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); }
+          }
+
+          .mockup-container {
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100%;
+            position: relative;
+            width: 100%;
+          }
+
+          .mockups-wall {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f9f8f6 0%, #f3f4f6 100%);
+            border-radius: 20px;
+          }
+
+          .mockups-wall::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            pointer-events: none;
+            background: linear-gradient(to bottom, #f9f8f6 0%, transparent 15%, transparent 85%, #f9f8f6 100%);
+          }
+
+          .mockups-columns {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            height: 100%;
+            align-items: center;
+            transform: rotate(-12deg) scale(1.1) translateY(-10%);
+          }
+
+          .mockup-column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            height: 100%;
+          }
+
+          .mockup-column-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+          }
+
+          .mockup-column:nth-child(1) .mockup-column-content {
+            animation: marquee-vertical 150s linear infinite;
+          }
+
+          .mockup-column:nth-child(2) .mockup-column-content {
+            animation: marquee-vertical-reverse 175s linear infinite;
+          }
+
+          .mockup-column:nth-child(3) .mockup-column-content {
+            animation: marquee-vertical 150s linear infinite;
+          }
+
+          .mockup-column:nth-child(4) .mockup-column-content {
+            animation: marquee-vertical-reverse 170s linear infinite;
+          }
+
+          .mockup-card {
+            position: relative;
+            width: 280px;
+            aspect-ratio: 9 / 19;
+            border-radius: 32px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border: none;
+            flex-shrink: 0;
+            cursor: pointer;
+          }
+
+          .mockup-card:hover {
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+          }
+
+          .mockup-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+          }
+
+          .mockup-like-button {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 300ms ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          }
+
+          .mockup-card:hover .mockup-like-button {
+            opacity: 1;
+            transform: scale(1.1);
+          }
+
+          .mockup-like-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.2);
+          }
+
+          .mockup-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 300ms ease;
+          }
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+
+          .mockup-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            animation: slideUp 300ms ease;
+          }
+
+          @keyframes slideUp {
+            from {
+              transform: translateY(30px);
+              opacity: 0;
+            }
+            to {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
+          .mockup-modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+          }
+
+          .mockup-modal-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 200ms ease;
+            z-index: 10000;
+          }
+
+          .mockup-modal-close:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+          }
+
+
+
+          @media (max-width: 1024px) {
+            .mockups-columns {
+              gap: 24px;
+            }
+            .mockup-card {
+              width: 240px;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .mockups-wall {
+              height: 600px;
+            }
+            .mockups-columns {
+              gap: 16px;
+              transform: rotate(-8deg) scale(1.05) translateY(-5%);
+            }
+            .mockup-card {
+              width: 200px;
+            }
+            .mockup-cta-card {
+              padding: 30px;
+              max-width: 300px;
+            }
+            .mockup-cta-card h2 {
+              font-size: 24px;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .mockups-wall {
+              height: 500px;
+              border-radius: 12px;
+            }
+            .mockups-columns {
+              gap: 12px;
+              transform: rotate(-6deg) scale(1) translateY(0);
+            }
+            .mockup-card {
+              width: 160px;
+              border-width: 4px;
+              border-radius: 20px;
+            }
+            .mockup-cta-card {
+              padding: 20px;
+              max-width: 260px;
+              border-radius: 32px;
+            }
+            .mockup-cta-card h2 {
+              font-size: 20px;
+            }
+          }
+        `}</style>
+
+        <div style={{ maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <h2 style={{
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+              fontWeight: '900',
+              color: '#1f2937',
+              marginBottom: '16px',
+              textTransform: 'uppercase',
+              letterSpacing: '-0.02em',
+            }}>
+              Experience the Magic
+            </h2>
+            <p style={{
+              fontSize: 'clamp(0.95rem, 1.8vw, 1.2rem)',
+              color: '#6b7280',
+              maxWidth: '600px',
+              margin: '0 auto',
+              lineHeight: '1.6',
+            }}>
+              Beautifully crafted screens that bring your vision to life
+            </p>
+          </div>
+
+          <div className="mockup-container">
+            <div className="mockups-wall">
+              <div className="mockups-columns">
+                {[0, 1, 2, 3].map((columnIndex) => {
+                  // Different mockup sequences for each column
+                  const mockupSequences = [
+                    // Column 1
+                    [
+                      '/grid/SC 44.png',
+                      '/grid/SC 45.png',
+                      '/grid/SC 46.jpg',
+                      '/grid/SC 47.jpg',
+                      '/grid/SC 48.jpg',
+                      '/grid/SC 52.jpg',
+                      '/grid/SC 56.jpg',
+                      '/grid/SC 57.jpg',
+                      '/grid/SC 59.jpg',
+                      '/grid/SC 63.jpg',
+                    ],
+                    // Column 2 (offset by 3)
+                    [
+                      '/grid/SC 46.jpg',
+                      '/grid/SC 47.jpg',
+                      '/grid/SC 48.jpg',
+                      '/grid/SC 52.jpg',
+                      '/grid/SC 56.jpg',
+                      '/grid/SC 57.jpg',
+                      '/grid/SC 59.jpg',
+                      '/grid/SC 63.jpg',
+                      '/grid/SC 44.png',
+                      '/grid/SC 45.png',
+                    ],
+                    // Column 3 (offset by 6)
+                    [
+                      '/grid/SC 56.jpg',
+                      '/grid/SC 57.jpg',
+                      '/grid/SC 59.jpg',
+                      '/grid/SC 63.jpg',
+                      '/grid/SC 44.png',
+                      '/grid/SC 45.png',
+                      '/grid/SC 46.jpg',
+                      '/grid/SC 47.jpg',
+                      '/grid/SC 48.jpg',
+                      '/grid/SC 52.jpg',
+                    ],
+                    // Column 4 (offset by 9)
+                    [
+                      '/grid/SC 63.jpg',
+                      '/grid/SC 44.png',
+                      '/grid/SC 45.png',
+                      '/grid/SC 46.jpg',
+                      '/grid/SC 47.jpg',
+                      '/grid/SC 48.jpg',
+                      '/grid/SC 52.jpg',
+                      '/grid/SC 56.jpg',
+                      '/grid/SC 57.jpg',
+                      '/grid/SC 59.jpg',
+                    ],
+                  ];
+
+                  const columnMockups = mockupSequences[columnIndex];
+                  const expandedMockups = columnMockups
+                    .concat(columnMockups)
+                    .concat(columnMockups)
+                    .map((src, index) => ({ src, alt: `Screen ${(index % columnMockups.length) + 1}` }));
+
+                  return (
+                    <div key={columnIndex} className="mockup-column">
+                      <div className="mockup-column-content">
+                        {expandedMockups.map((screen, index) => (
+                          <div key={index} className="mockup-card" onClick={() => setSelectedMockup(screen.src)}>
+                            <Image
+                              src={screen.src}
+                              alt={screen.alt}
+                              width={280}
+                              height={530}
+                              quality={90}
+                              className="mockup-image"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Mockup Modal ── */}
+      {selectedMockup && (
+        <div className="mockup-modal" onClick={() => setSelectedMockup(null)}>
+          <div className="mockup-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="mockup-modal-close" onClick={() => setSelectedMockup(null)}>✕</button>
+            <Image
+              src={selectedMockup}
+              alt="Full size mockup"
+              width={800}
+              height={1500}
+              quality={95}
+              className="mockup-modal-image"
+            />
+          </div>
+        </div>
+      )}
 
       {/* ── Feature Section ── */}
       <style>{`
