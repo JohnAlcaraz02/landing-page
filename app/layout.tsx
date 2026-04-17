@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tarsi - Track Your Money Effortlessly",
+  title: "Tarsi | Budgeting without the stress",
   description: "Track all your money in one place, effortlessly. Download Arsi today.",
 };
 

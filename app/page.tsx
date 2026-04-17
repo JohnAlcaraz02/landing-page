@@ -130,95 +130,358 @@ export default function Home() {
   return (
     <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#f9fafb', display: 'flex', flexDirection: 'column' }}>
 
+      <style>{`
+        @keyframes floatIcon1 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        @keyframes floatIcon2 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-25px) rotate(-8deg); }
+        }
+        @keyframes floatIcon3 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(3deg); }
+        }
+        @keyframes floatIcon4 {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-22px) rotate(-5deg); }
+        }
+        .float-icon-1 { animation: floatIcon1 6s ease-in-out infinite; }
+        .float-icon-2 { animation: floatIcon2 7s ease-in-out infinite; }
+        .float-icon-3 { animation: floatIcon3 5.5s ease-in-out infinite; }
+        .float-icon-4 { animation: floatIcon4 6.5s ease-in-out infinite; }
+        
+        @media (max-width: 768px) {
+          .hero-wrap {
+            padding: 24px 12px 24px 12px !important;
+            margin: 12px !important;
+            minHeight: auto !important;
+            borderRadius: 16px !important;
+            flexDirection: column !important;
+            gap: 20px !important;
+          }
+          /* Hide the phone mockup section */
+          .hero-wrap > div:last-of-type {
+            display: none !important;
+          }
+          /* Keep floating icons visible */
+          .float-icon-1, .float-icon-2, .float-icon-3, .float-icon-4 {
+            width: 35px !important;
+            height: 35px !important;
+            opacity: 0.6 !important;
+            display: block !important;
+          }
+          .float-icon-1 img, .float-icon-2 img, .float-icon-3 img, .float-icon-4 img {
+            width: 35px !important;
+            height: 35px !important;
+          }
+          .hero-wrap > div:nth-child(2),
+          .hero-wrap > div:nth-child(3) {
+            display: block !important;
+            width: 200px !important;
+            height: 200px !important;
+            opacity: 0.4 !important;
+          }
+        }
+      `}</style>
+
       {/* ── Hero Section ── */}
-      <div style={{ margin: '26px 30px', borderRadius: '30px', overflow: 'hidden', position: 'relative', minHeight: '600px' }}>
+      <div className="hero-wrap" style={{ 
+        backgroundColor: '#eef2e8', 
+        borderRadius: '20px', 
+        padding: 'clamp(12px, 5vw, 48px)',
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        gap: 'clamp(12px, 5vw, 32px)',
+        overflow: 'hidden',
+        position: 'relative',
+        minHeight: '520px',
+        margin: 'clamp(8px, 3vw, 26px)'
+      }}>
+        
+        {/* Animated background blobs */}
         <div style={{
-          position: 'absolute', inset: 0,
-          backgroundColor: '#f0f4ee',
-          backgroundImage: `
-            radial-gradient(ellipse 120% 80% at 50% 10%, rgba(100, 139, 92, 0.3) 0%, transparent 50%),
-            radial-gradient(ellipse 100% 100% at 50% 90%, rgba(92, 138, 82, 0.2) 0%, transparent 60%)
-          `,
-          zIndex: 0,
+          position: 'absolute',
+          width: '400px',
+          height: '400px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(100, 139, 92, 0.08) 0%, transparent 70%)',
+          bottom: '-100px',
+          right: '10%',
+          zIndex: 0
         }} />
         <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundRepeat: 'repeat', backgroundSize: '128px 128px', opacity: 0.05, zIndex: 1,
+          position: 'absolute',
+          width: '300px',
+          height: '300px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, rgba(184, 219, 160, 0.06) 0%, transparent 70%)',
+          top: '-50px',
+          left: '-100px',
+          zIndex: 0
         }} />
 
-        <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '600px', padding: '40px 20px', textAlign: 'center' }}>
-          <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '20px 20px', width: '100%', marginBottom: '20px' }}>
-            <Image src="/assets/tarsi_logo.png" alt="Tarsi Logo" width={120} height={40} quality={100} style={{ height: '70px', width: 'auto' }} />
-            <a href="https://www.facebook.com/groups/1243677331220736/" target="_blank" rel="noreferrer" style={{
-              backgroundColor: '#648B5C', color: '#ffffff', padding: '15px 20px', borderRadius: '9999px',
-              fontWeight: '800', fontSize: '12px', border: 'none', cursor: 'pointer', textDecoration: 'none', display: 'inline-block', whiteSpace: 'nowrap',
-            }}>
-              JOIN COMMUNITY
-            </a>
-          </nav>
+        {/* Floating Icons */}
+        <div className="float-icon-1" style={{
+          position: 'absolute',
+          top: '15%',
+          left: '8%',
+          zIndex: 1
+        }}>
+          <Image src="/assets/icons.png" alt="Floating Icon" width={60} height={60} quality={100} style={{ opacity: 0.8 }} />
+        </div>
+        <div className="float-icon-2" style={{
+          position: 'absolute',
+          top: '25%',
+          right: '12%',
+          zIndex: 1
+        }}>
+          <Image src="/assets/icons.png" alt="Floating Icon" width={50} height={50} quality={100} style={{ opacity: 0.7 }} />
+        </div>
+        <div className="float-icon-3" style={{
+          position: 'absolute',
+          bottom: '20%',
+          left: '10%',
+          zIndex: 1
+        }}>
+          <Image src="/assets/icons.png" alt="Floating Icon" width={55} height={55} quality={100} style={{ opacity: 0.75 }} />
+        </div>
+        <div className="float-icon-4" style={{
+          position: 'absolute',
+          bottom: '15%',
+          right: '15%',
+          zIndex: 1
+        }}>
+          <Image src="/assets/icons.png" alt="Floating Icon" width={45} height={45} quality={100} style={{ opacity: 0.8 }} />
+        </div>
 
-          <p style={{
-            fontSize: '14px', fontWeight: '600', color: '#648B5C', marginBottom: '12px', letterSpacing: '0.5px',
-            textTransform: 'uppercase'
-          }}>
-            AI in Your Pocket
-          </p>
-          
+        {/* Logo - Top Left */}
+        <div style={{
+          position: 'absolute',
+          top: '12px',
+          left: '12px',
+          zIndex: 3,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <Image src="/assets/logo.png" alt="Tarsi Logo" width={120} height={40} quality={100} style={{ height: '32px', width: 'auto' }} />
+          <span style={{
+            fontSize: '18px',
+            fontWeight: '700',
+            color: '#648B5C ',
+            letterSpacing: '0.02em'
+          }}>Tarsi</span>
+        </div>
+
+        {/* Nav button */}
+        <button style={{
+          position: 'absolute',
+          top: '12px',
+          right: '12px',
+          background: '#648B5C',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '8px',
+          padding: '8px 16px',
+          fontSize: 'clamp(10px, 2.5vw, 12px)',
+          fontWeight: '600',
+          cursor: 'pointer',
+          letterSpacing: '0.04em',
+          zIndex: 3,
+          boxShadow: '0 4px 12px rgba(100, 139, 92, 0.3)',
+          transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)';
+          (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 24px rgba(100, 139, 92, 0.4)';
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+          (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 12px rgba(100, 139, 92, 0.3)';
+        }}>
+          JOIN COMMUNITY
+        </button>
+
+        {/* Left content */}
+        <div style={{
+          position: 'relative',
+          zIndex: 2,
+          textAlign: 'center',
+          maxWidth: '400px',
+          width: '100%'
+        }}>
           <h1 style={{
-            fontSize: 'clamp(2rem, 6vw, 3.5rem)', fontWeight: '800', color: '#111111',
-            lineHeight: '1.15', marginBottom: '20px', maxWidth: '900px'
+            fontSize: 'clamp(28px, 6vw, 45px)',
+            fontWeight: '700',
+            lineHeight: '1.1',
+            color: '#1a2e12',
+            margin: '0 0 16px'
           }}>
-            Revolutionize Your Day<br />with the Power of AI
+            Track all your money in one place, <br/>effortlessly
           </h1>
-          
+
           <p style={{
-            fontSize: '16px', color: '#6b7280', lineHeight: '1.6', marginBottom: '32px',
-            maxWidth: '600px', fontWeight: '500'
+            fontSize: 'clamp(14px, 3.5vw, 16px)',
+            color: '#4a5c3a',
+            margin: '0 0 24px',
+            lineHeight: '1.6'
           }}>
-            Experience the power of artificial intelligence to simplify tasks, boost productivity, and enhance your daily life.
+            Your personal budget tracker that helps you manage your money in one place.
           </p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', justifyContent: 'center', alignItems: 'center', width: '100%', maxWidth: '400px' }}>
-            <a href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer" style={{
-              backgroundColor: 'white', color: '#648B5C', padding: '12px 28px', borderRadius: '9999px',
-              fontWeight: '800', fontSize: '13px', border: '2px solid #648B5C', cursor: 'pointer', textDecoration: 'none', 
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', whiteSpace: 'nowrap',
-              transition: 'all 200ms ease', width: '100%',
+
+          {/* Buttons */}
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer" style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '12px 22px',
+              borderRadius: '10px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              border: 'none',
+              background: '#648B5C',
+              color: '#fff',
+              textDecoration: 'none',
+              transition: 'transform 0.15s, box-shadow 0.15s'
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = '#648B5C';
-              (e.currentTarget as HTMLElement).style.color = 'white';
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+              (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 18px rgba(60, 100, 30, 0.18)';
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = 'white';
-              (e.currentTarget as HTMLElement).style.color = '#648B5C';
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+              (e.currentTarget as HTMLElement).style.boxShadow = 'none';
+            }}>
+              <Image src="/assets/play_store.png" alt="Play Store" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
+              Play Store
+            </a>
+            <a href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer" style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '12px 22px',
+              borderRadius: '10px',
+              fontSize: '14px',
+              fontWeight: '600',
+              cursor: 'pointer',
+              border: 'none',
+              background: '#ffffff',
+              color: '#648B5C',
+              textDecoration: 'none',
+              transition: 'transform 0.15s, box-shadow 0.15s'
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+              (e.currentTarget as HTMLElement).style.boxShadow = '0 6px 18px rgba(60, 100, 30, 0.18)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+              (e.currentTarget as HTMLElement).style.boxShadow = 'none';
             }}>
               <Image src="/assets/app_store1.png" alt="App Store" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
-              DOWNLOAD FOR iOS
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.tarsi.app" target="_blank" rel="noreferrer" style={{
-              backgroundColor: 'white', color: '#648B5C', padding: '12px 28px', borderRadius: '9999px',
-              fontWeight: '800', fontSize: '13px', border: '2px solid #648B5C', cursor: 'pointer', textDecoration: 'none', 
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', whiteSpace: 'nowrap',
-              transition: 'all 200ms ease', width: '100%',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = '#648B5C';
-              (e.currentTarget as HTMLElement).style.color = 'white';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.backgroundColor = 'white';
-              (e.currentTarget as HTMLElement).style.color = '#648B5C';
-            }}>
-              <Image src="/assets/play_store.png" alt="Google Play" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
-              DOWNLOAD FOR ANDROID
+              App Store
             </a>
           </div>
-          
-          <div style={{ marginTop: '48px', display: 'flex', justifyContent: 'center' }}>
-            <Image src="/assets/mockup1.png" alt="Tarsi App Mockups" width={1600} height={820} quality={100}
-              style={{ width: '100%', maxWidth: '300px', height: 'auto', display: 'block' }} priority />
+        </div>
+
+        {/* Right — phone with circle glow */}
+        <div style={{
+          flex: '0 0 auto',
+          position: 'relative',
+          zIndex: 2,
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+          <div style={{
+            position: 'relative',
+            width: '600px',
+            height: '500px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            {/* Big soft glow circle behind the phone */}
+            <div className="glow-circle" style={{
+              position: 'absolute',
+              width: '320px',
+              height: '320px',
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, #b8dba0 0%, #c8e8b0 40%, transparent 75%)',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 0
+            }} />
+
+            {/* Thin orbit rings */}
+            <div className="orbit-1" style={{
+              position: 'absolute',
+              borderRadius: '50%',
+              border: '1.5px solid rgba(61, 110, 42, 0.18)',
+              width: '370px',
+              height: '370px',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 0
+            }} />
+
+            <div className="orbit-2" style={{
+              position: 'absolute',
+              borderRadius: '50%',
+              border: '1.5px dashed rgba(61, 110, 42, 0.1)',
+              width: '430px',
+              height: '430px',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 0
+            }} />
+
+            {/* Arrow accent */}
+            <svg className="arrow-accent" viewBox="0 0 80 80" fill="none" style={{
+              position: 'absolute',
+              top: '20px',
+              left: '-10px',
+              width: '80px',
+              height: '80px',
+              zIndex: 3,
+              opacity: 0.7
+            }}>
+              <path d="M10 70 Q10 10 70 10" stroke="#3d6e2a" strokeWidth="1.5" strokeDasharray="4 4" fill="none" />
+              <path d="M60 6 L70 10 L64 18" stroke="#3d6e2a" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+
+            {/* Phone image */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-10%',
+            left: '73%',
+            transform: 'translateX(-50%)',
+            zIndex: 2,
+            width: '520px',
+            WebkitMaskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, black 0%, black 70%, transparent 100%)'
+          }}>
+            <Image
+              src="/assets/new_mockup.png"
+              alt="App mockup"
+              width={420}
+              height={860}
+              quality={100}
+              style={{
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                objectFit: 'contain'
+              }}
+            />
+          </div>
           </div>
         </div>
       </div>
@@ -1108,7 +1371,7 @@ export default function Home() {
           <div className="feature-grid" style={{ overflow: 'visible' }}>
 
             {/* Card 1 — No.1 Finance App */}
-            <div className="feat-card feat-card-1 feature-reveal-card feature-reveal-left">
+            <div className="feat-card feat-card-1 feature-reveal-card feature-reveal-left" style={{ marginTop: '40px' }}>
               <div className="char-img-card1">
                 <Image src="/assets/No.1_app.png" alt="Tarsi holding the flag" width={260} height={380} quality={100} style={{ width: '100%', height: 'auto', display: 'block' }} />
               </div>
@@ -1122,7 +1385,7 @@ export default function Home() {
             </div>
 
             {/* Card 2 — Offline AI Assistant */}
-            <div className="feat-card feat-card-2 feature-reveal-card feature-reveal-right">
+            <div className="feat-card feat-card-2 feature-reveal-card feature-reveal-right" style={{ marginTop: '40px' }}>
               <div className="feat-card-2-content">
                 <div className="feat-card-2-title">OFFLINE AI<br />ASSISTANT</div>
                 <div className="feat-card-2-subtitle">Intelligent, on-device chat,<br />Emphasize privacy.</div>
