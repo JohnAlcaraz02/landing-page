@@ -267,7 +267,7 @@ export default function Home() {
           alignItems: 'center',
           gap: '8px'
         }}>
-          <Image src="/assets/logo.png" alt="Tarsi Logo" width={120} height={40} quality={100} style={{ height: '32px', width: 'auto' }} />
+          <Image src="/assets/logo1.png" alt="Tarsi Logo" width={120} height={40} quality={100} style={{ height: '32px', width: 'auto' }} />
           <span style={{
             fontSize: '18px',
             fontWeight: '700',
@@ -357,7 +357,7 @@ export default function Home() {
               (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
               (e.currentTarget as HTMLElement).style.boxShadow = 'none';
             }}>
-              <Image src="/assets/play_store.png" alt="Play Store" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
+              <Image src="/assets/Play_store.png" alt="Play Store" width={20} height={20} style={{ height: '20px', width: 'auto' }} />
               Play Store
             </a>
             <a href="https://apps.apple.com/us/app/tarsi-budget-tracker/id6760278399" target="_blank" rel="noreferrer" style={{
